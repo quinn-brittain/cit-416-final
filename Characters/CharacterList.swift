@@ -7,7 +7,11 @@ struct CharacterList: View {
     var body: some View {
         NavigationView {
             VStack {
-                
+                List {
+                    ForEach(0 ..< characters.count) { index in
+                        CharacterRow(character: characters.sorted { $0.id ?? -1 < $1.id ?? -1 }[index])
+                    }
+                }.onAppear(perform: getCharacters)
             }
             .navigationTitle("Characters")
         }.navigationViewStyle(StackNavigationViewStyle())
